@@ -3,82 +3,118 @@ const sequelize = require('../config/connection');
 const { customers } = require('../models')
 
 
-
 exports.createProducttoAnOrder = async (req, res) => {
-  const transaction = await sequelize.transaction();
+    console.log(req.body)
 
-  try {
-    const {
-      customer_id,
-      orderDate,
-      createDate,
-      updateDate,
-      note,
-      status,
-      items
-    } = req.body;
+    const transaction = await sequelize.transaction();
 
-    // Create Order
-    const order = await orders.create({
-      customer_id,
-      orderDate,
-      createDate,
-      updateDate,
-      note,
-      status
-    }, { transaction });
+    try {
 
-    // Create Items
-    const orderItems = items.map(item => ({
-      order_id: order.id,
-      itemId: item.itemId,          // must match product_lists.id
-      productName: item.productName,
-      Unit_price: item.Unit_price,
-      Quanity: item.Quanity,
-      Tax: item.Tax,
-      Discount: item.Discount,
-      status: item.status
-    }));
+        const {
+            customer_id,
+            bill_from_id,
+            ship_to_id,
+            ship_from_id,
+            voucher_number,
+            voucher_date,
+            reference_number,
+            tax_inclusion,
+            orderDate,
+            createDate,
+            updateDate,
+            note,
+            status,
+            items
+        } = req.body;
 
-    await orderList.bulkCreate(orderItems, { transaction });
+        // ✅ Create Order
+        const order = await orders.create({
+            customer_id,
+            bill_from_id,
+            ship_to_id,
+            ship_from_id,
+            voucher_number,
+            voucher_date,
+            reference_number,
+            tax_inclusion,
+            orderDate,
+            createDate,
+            updateDate,
+            note,
+            status
+        }, { transaction });
 
-    await transaction.commit();
 
-    res.status(201).json({
-      message: "Order created successfully",
-      orderId: order.id
-    });
-  } catch (error) {
-    await transaction.rollback();
-    res.status(500).json({ error: error.message });
-  }
+        // ✅ Prepare items
+        const orderItemsData = items.map(item => ({
+            order_id: order.id,
+            item_id: item.item_id,
+            item_name: item.item_name,
+            UomQty: item.UomQty || 0,
+            Size: item.Size || 0,
+            mrp: item.mrp || 0,
+            Qty: item.Qty || 0,
+            Unit_price: item.Unit || 0,
+            Rate_Inc_Tax: item.Rate_Inc_Tax || 0,
+            Rate_Tax_Extra: item.Rate_Tax_Extra || 0,
+            Tax: item.Tax || 0,
+            Discount: item.Dis || 0,
+            Taxable_Value: item.Taxable_Value || 0,
+            Short_Narration: item.Short_Narration || null
+        }));
+
+
+        // ✅ Save items
+        await orderList.bulkCreate(orderItemsData, { transaction });
+
+
+        await transaction.commit();
+
+        res.status(201).json({
+            message: "Order created successfully",
+            orderId: order.id
+        });
+
+    } catch (error) {
+         console.log(error)
+
+        await transaction.rollback();
+
+        res.status(500).json({
+           
+            error: error.message
+        });
+
+    }
+
 };
+
 
 
 // GET ALL ORDERS
 // GET ALL ORDERS
 exports.getAllOrders = async (req, res) => {
-  try {
-    const allOrders = await orders.findAll({
-      include: [
-        {
-          model: orderList,
-          as: "items"
-        },
-        {
-          model: customers,
-          as: "customer"
-        }
-      ],
-      order: [["createDate", "DESC"]]
-    });
+    try {
+        const allOrders = await orders.findAll({
+            include: [
+                {
+                    model: orderList,
+                    as: "items"
+                },
+                {
+                    model: customers,
+                    as: "customer"
+                }
+            ],
+            order: [["createDate", "DESC"]]
+        });
 
-    res.status(200).json(allOrders);
-  } catch (error) {
-    res.status(500).json({
-      error: error.message
-    });
-  }
+        res.status(200).json(allOrders);
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
 };
 
 

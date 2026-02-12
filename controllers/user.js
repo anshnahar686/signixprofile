@@ -8,7 +8,7 @@ const generatesOTP = () => {
     return otp
 
 }
-const generateToken = (values) => {
+ const generateToken = (values) => {
     const token = generate.sign({ id: values.id, email: values.email, password: values.password }, process.env.SECREAT_KEY, { expiresIn: '3h' })
     console.log(token)
     return token

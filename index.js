@@ -44,7 +44,7 @@ app.listen(PORT,()=>{
     }).catch((err)=>{
         console.log(err)
     })
-      sequilze.sync().then(()=>{
+      sequilze.sync({alter:true}).then(()=>{
         console.log("tables are connectd")
     }).catch((err)=>{
         console.log(err)
