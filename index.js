@@ -15,12 +15,16 @@ const orderslist=require('./routes/orderlist.js')
 const customers=require('./routes/customers.js')
 const products=require('./routes/product.js')
 const products_item=require('./routes/order_items.js')
+const roles=require('./routes/roles.js')
+const department=require('./routes/department.js')
 app.use(cors({
     origin: "http://localhost:5173", // frontend URL
     credentials: true       ,
     methods:['GET','POST','PUT','DELETE']         // required for cookies
 }));
 app.use(express.json())
+
+
 app.use(cookieeParser())
 app.use(
   "/uploads",
@@ -36,7 +40,8 @@ app.use('/api/orderList/',orderslist)//orderlist
 app.use('/api/product/',products)//products
 app.use('/api/orderitems/',products_item)//products
 app.use('/api/category/',category)//products
-
+app.use('/api/departmet/',department)//roles
+app.use('/api/roles/',roles)//roles
 const PORT=process.env.PORT||8080
 app.listen(PORT,()=>{
     sequilze.authenticate().then(()=>{
@@ -44,7 +49,7 @@ app.listen(PORT,()=>{
     }).catch((err)=>{
         console.log(err)
     })
-      sequilze.sync({alter:true}).then(()=>{
+      sequilze.sync({force:true}).then(()=>{
         console.log("tables are connectd")
     }).catch((err)=>{
         console.log(err)

@@ -3,15 +3,21 @@ const employeess = require('../../models/employees.js')
 const { where } = require('sequelize')
 exports.CreateEmployee = async (req, res) => {
     try {
-        const { employee, Ledgergroup, Emp_Code, Generic_Name, status, Address, pincode, latitude, longitude, DOJ, Designation, Virtual_Office, new_role, TCS, DOB, Account_Holder_Name, accountNumber, IFSC, Name_of_Bank, pan, aadhaar, dlNumber, passport, pfNumber, uanNumber, esiNumber, FullName, SignInMobile, Singn_email, Singn_password, Reports_To_Emp_id, Reports_To_Emp, role } = req.body
+        console.log(req.body)
+        const { employee, Ledgergroup, Emp_Code, Generic_Name, status, Address, pincode, latitude, longitude, DOJ, Designation, Virtual_Office, new_role, TCS, DOB, Account_Holder_Name, accountNumber, IFSC, Name_of_Bank, pan, aadhaar, dlNumber, passport, pfNumber, uanNumber, esiNumber, FullName, SignInMobile, Singn_email, Singn_password, Reports_To_Emp_id, Reports_To_Emp, role,SIGN_IN_GROUP,department } = req.body
         if (!employee || !Ledgergroup || !Emp_Code || !Generic_Name || !status || !pincode || !DOJ || !Designation || !Virtual_Office || !Account_Holder_Name || !accountNumber || !IFSC || !Name_of_Bank || !pan || !aadhaar || !dlNumber || !passport || !pfNumber,
             !uanNumber || !esiNumber || !FullName || !SignInMobile || !role) {
             return res.status(500).json({ message: 'Missing or empty fields' })
         }
-        const newuser = await employeess.create({ employee, Ledgergroup, Emp_Code, Generic_Name, status, Address, pincode, latitude, longitude, DOJ, Designation, Virtual_Office, new_role, TCS, DOB, Account_Holder_Name, accountNumber, IFSC, Name_of_Bank, pan, aadhaar, dlNumber, passport, pfNumber, uanNumber, esiNumber, FullName, SignInMobile, Singn_email, Singn_password, Reports_To_Emp_id, Reports_To_Emp, role })
+         const pic = req.files?.pic?.[0]?.filename || null;
+        const photo = req.files?.photo?.[0]?.filename || null;
+        const Face_Pic= req.files?.Face_Pic?.[0]?.filename || null;
+       
+        const newuser = await employeess.create({ employee, Ledgergroup, Emp_Code, Generic_Name, status, Address, pincode, latitude, longitude, DOJ, Designation, Virtual_Office, new_role, TCS, DOB, Account_Holder_Name, accountNumber, IFSC, Name_of_Bank, pan, aadhaar, dlNumber, passport, pfNumber, uanNumber, esiNumber, FullName, SignInMobile, Singn_email, Singn_password, Reports_To_Emp_id, Reports_To_Emp, role,SIGN_IN_GROUP,pic,photo,Face_Pic,department })
         res.status(200).json({ message: 'employee is created', newuser })
 
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: 'some error is ocuured', error: error.message })
     }
 }

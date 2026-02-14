@@ -88,7 +88,7 @@ const Employees = sequilize.define('employees', {
         validate: {
             notEmpty: true,
             len: [4, 40],
-            is: /^[a-zA-Z\s]+$/i
+           
 
         }
     },
@@ -144,16 +144,15 @@ const Employees = sequilize.define('employees', {
         }
 
     },
-    accountNumber: {
-        type: DataTypes.STRING(20),
-        allowNull: false,
-        unique: true,
-        validate: {
-            notEmpty: true,              // must not be blank
-            isNumeric: true,             // only digits allowed
-            len: [10, 20]                // length between 10 and 20 digits
-        }
+  accountNumber: {
+    type: DataTypes.STRING(20),
+    allowNull: false,
+    validate: {
+        notEmpty: true,
+        isNumeric: true,
+        len: [10, 20]
     },
+},
     IFSC: {
         type: DataTypes.STRING(11),
         allowNull: false,
@@ -233,24 +232,25 @@ const Employees = sequilize.define('employees', {
 
     },
     SignInMobile: {
-        type: DataTypes.STRING(12),
+        type: DataTypes.STRING(10),
         allowNull: false,
         validate: {
             notEmpty: true,
-            is: /^\d{12}$/
+            is: /^\d{10}$/
         }
     },
-    Singn_email: {
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-        }
-    },
+  Singn_email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,   // keep only this unique (recommended)
+    validate: {
+        notEmpty: true,
+        isEmail: true
+    }
+},
     Singn_password: {
         type: DataTypes.STRING,
-        unique: true,
+ 
         allowNull: false,
         validate: {
             notEmpty: true,
@@ -281,6 +281,19 @@ const Employees = sequilize.define('employees', {
     },
     Face_Pic: {
         type: DataTypes.BLOB
+    },
+    SIGN_IN_GROUP:{
+        type:DataTypes.STRING,
+    },
+    department: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: true,
+            len: [4, 40],
+           
+
+        }
     }
 
 

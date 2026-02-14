@@ -11,7 +11,7 @@ const User_login = sequilize.define("User_login", {
     employee_code: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
+      
 
     },
       first_name: {
@@ -25,16 +25,6 @@ const User_login = sequilize.define("User_login", {
         allowNull: false,
 
         
-    },
-    date_of_joining: {
-        type: DataTypes.DATE,
-        required: true
-    },
-
-    employment_type: {
-        type:DataTypes.ENUM("Full-time", "Part-time", "Contract"),
-          allowNull: false,
-
     },
 
     status: {
@@ -69,9 +59,7 @@ const User_login = sequilize.define("User_login", {
     }
   }
 },
-
-
-    password: {
+password: {
         type: DataTypes.STRING,
         allowNull:false,
         validate:{
@@ -81,18 +69,7 @@ const User_login = sequilize.define("User_login", {
           
         }
     },
-    // role_id: {
-    //     type: String,
-
-    //     index: true,
-    //     ref: 'Role'
-    // },
-    // department: {
-    //     type: String,
-
-    //     index: true,
-    //     ref: 'Departments'
-    // },
+   
     last_login: {
         type: DataTypes.STRING,
         default:null

@@ -14,10 +14,10 @@ const generatesOTP = () => {
     return token
 }
 exports.Register = async (req, res) => {
-
-    console.log(req.body)
-    const { employee_code, first_name, last_name, date_of_joining, employment_type, status, email, phone, password, last_login } = req.body
-    if (!employee_code || !first_name || !last_name || !date_of_joining || !employment_type || !status || !email || !phone || !password) {
+    try {
+        console.log(req.body)
+    const { employee_code, first_name, last_name,status, email, phone, password, last_login } = req.body
+    if (!employee_code || !first_name || !last_name ||  !email || !phone || !password) {
         return res.status(300).json({ message: 'please Enter all fields' })
     }
     const users = await user.findOne({
@@ -29,8 +29,12 @@ exports.Register = async (req, res) => {
     }
     const hashedpassword = await bycrypt.hash(password, 10)
     console.log(hashedpassword)
-    const userss = await user.create({ employee_code, first_name, last_name, date_of_joining, employment_type, status, email, phone, password: hashedpassword, last_login })
+    const userss = await user.create({ employee_code, first_name, last_name, status, email, phone, password: hashedpassword, last_login })
     res.status(200).json({ message: 'user is created', userss })
+    } catch (error) {
+        console.log(error)
+        
+    }
 }
 exports.Login = async (req, res) => {
     try {
