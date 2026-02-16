@@ -20,7 +20,7 @@ const department=require('./routes/department.js')
 const attendence_logs=require('./routes/dailyattendence_logs.js')
 const daily_attendence_logs=require('./routes/attendence_log.js')
 app.use(cors({
-    origin: "http://localhost:5173", // frontend URL
+    origin: ["http://localhost:5173","http://localhost:4173/"], // frontend URL
     credentials: true       ,
     methods:['GET','POST','PUT','DELETE']         // required for cookies
 }));
@@ -34,16 +34,16 @@ app.use(
 )
 app.get('/api/check-auth',controllers.CheckAuthentication)
 app.use('/api/attendence',attendence)
-app.use('/api/user/',router)//user
-app.use('/api/employee/',employee)//employees
-app.use('/api/customer/',customers)//customers
+app.use('/api/user/',router)//user done
+app.use('/api/employee/',employee)//employees done
+app.use('/api/customer/',customers)//customers done
 app.use('/api/orders/',orders)//orders
 app.use('/api/orderList/',orderslist)//orderlist
-app.use('/api/product/',products)//products
-app.use('/api/orderitems/',products_item)//products
-app.use('/api/category/',category)//products
-app.use('/api/departmet/',department)//roles
-app.use('/api/roles/',roles)//roles
+app.use('/api/product/',products)//products done
+app.use('/api/orderitems/',products_item)//products 
+app.use('/api/category/',category)//category done
+app.use('/api/departmet/',department)//departments done
+app.use('/api/roles/',roles)//roles done
 app.use('/api/daily_attendence/',attendence_logs)
 app.use('/api/attendence_logs/',daily_attendence_logs)
 const PORT=process.env.PORT||8080

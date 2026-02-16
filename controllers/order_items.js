@@ -23,7 +23,7 @@ exports.createProducttoAnOrder = async (req, res) => {
             createDate,
             updateDate,
             note,
-            status,
+            
             items
         } = req.body;
 
@@ -41,7 +41,7 @@ exports.createProducttoAnOrder = async (req, res) => {
             createDate,
             updateDate,
             note,
-            status
+            
         }, { transaction });
 
 
@@ -128,9 +128,13 @@ exports.getSingleOrder = async (req, res) => {
         const order = await orders.findByPk(id, {
 
             include: [
-                {
+                 {
                     model: orderList,
                     as: "items"
+                },
+                {
+                    model: customers,
+                    as: "customer"
                 }
             ]
 
@@ -161,11 +165,13 @@ exports.getSingleOrder = async (req, res) => {
 // UPDATE ORDER
 exports.updateOrder = async (req, res) => {
 
+ 
     const transaction = await sequelize.transaction();
 
     try {
 
         const { id } = req.params;
+        console.log(id)
 
         const order = await orders.findByPk(id);
 
@@ -179,22 +185,11 @@ exports.updateOrder = async (req, res) => {
 
         }
 
-        const {
-            customer_id,
-            orderDate,
-            updateDate,
-            note,
-            status,
-            items
-        } = req.body;
+        
 
-        await order.update({
-            customer_id,
-            orderDate,
-            updateDate,
-            note,
-            status
-        }, { transaction });
+        await order.update(req.body,{where:{id:id}}
+            
+        , { transaction });
 
 
         await orderList.destroy({
