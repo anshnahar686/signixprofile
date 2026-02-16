@@ -18,6 +18,7 @@ const products_item=require('./routes/order_items.js')
 const roles=require('./routes/roles.js')
 const department=require('./routes/department.js')
 const attendence_logs=require('./routes/dailyattendence_logs.js')
+const daily_attendence_logs=require('./routes/attendence_log.js')
 app.use(cors({
     origin: "http://localhost:5173", // frontend URL
     credentials: true       ,
@@ -43,7 +44,8 @@ app.use('/api/orderitems/',products_item)//products
 app.use('/api/category/',category)//products
 app.use('/api/departmet/',department)//roles
 app.use('/api/roles/',roles)//roles
-app.use('/api/attendence_log/',attendence_logs)
+app.use('/api/daily_attendence/',attendence_logs)
+app.use('/api/attendence_logs/',daily_attendence_logs)
 const PORT=process.env.PORT||8080
 app.listen(PORT,()=>{
     sequilze.authenticate().then(()=>{
@@ -51,7 +53,7 @@ app.listen(PORT,()=>{
     }).catch((err)=>{
         console.log(err)
     })
-      sequilze.sync({force:true}).then(()=>{
+      sequilze.sync().then(()=>{
         console.log("tables are connectd")
     }).catch((err)=>{
         console.log(err)
