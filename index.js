@@ -26,7 +26,7 @@ app.use(cors({
 }));
 app.use(express.json())
 
-/
+
 app.use(cookieeParser())
 app.use(
   "/uploads",
@@ -38,7 +38,7 @@ app.use('/api/user/',router)//user done
 app.use('/api/employee/',employee)//employees done
 app.use('/api/customer/',customers)//customers done
 app.use('/api/orders/',orders)//orders
-app.use('api/orderList/',orderslist)//orderlist
+app.use('/api/orderList/',orderslist)//orderlist
 app.use('/api/product/',products)//products done
 app.use('/api/orderitems/',products_item)//products 
 app.use('/api/category/',category)//category done
@@ -53,7 +53,7 @@ app.listen(PORT,()=>{
     }).catch((err)=>{
         console.log(err)
     })
-      sequilze.sync({force:true}).then(()=>{
+      sequilze.sync().then(()=>{
         console.log("tables are connectd")
     }).catch((err)=>{
         console.log(err)
