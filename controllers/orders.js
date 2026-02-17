@@ -37,10 +37,7 @@ exports.AllOrders=async (req,res) => {
 exports.Order=async (req,res) => {
  try {
        const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(401).json({message:'order id is invalid'})
-    }
+   
     const findOrder=await orders.findByPk(id)
     if(!findOrder)
     {
@@ -56,10 +53,7 @@ exports.Order=async (req,res) => {
 exports.UpdateOrder=async (req,res) => {
  try {
        const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(401).json({message:'order id is invalid'})
-    }
+    
     const findOrder=await orders.findByPk(id)
     if(!findOrder)
     {
@@ -81,10 +75,7 @@ exports.UpdateOrder=async (req,res) => {
 exports.DeleteOrder=async (req,res) => {
  try {
        const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(401).json({message:'order id is invalid'})
-    }
+    
     const findOrder=await orders.findByPk(id)
     if(!findOrder)
     {

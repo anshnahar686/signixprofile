@@ -32,15 +32,9 @@ exports.List=async (req,res) => {
  try {
     const {id}=req.params
     console.log(id)
-    if(!validate(id))
-    {
-        return res.status(500).json({message:'id is invalid'})
-    }
+    
     const findlist=await orderList.findByPk(id)
-    if(!findlist)
-    {
-         return res.status(500).json({message:'orderlist is not find'})
-    }
+    
       res.status(200).json({message:'all order list',findlist})
  } catch (error) {
     res.status(500).json({message:'some error is occured',error:error.message})
@@ -75,10 +69,7 @@ try {
 exports.DeleteList=async (req,res) => {
 try {
        const id=req.params.id
-    if(!validate(id))
-    {
-        return res.status(500).json({message:'id is invalid'})
-    }
+   
     const findlist=await orderList.findByPk(id)
     if(!findlist)
     {

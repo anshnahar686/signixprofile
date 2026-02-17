@@ -2,8 +2,8 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 
 const order_items = sequelize.define("order_items", {
-  order_id: DataTypes.UUID,
-  item_id: DataTypes.UUID,
+  order_id: DataTypes.INTEGER,
+  item_id: DataTypes.INTEGER,
   item_name: DataTypes.STRING,
   UomQty: DataTypes.FLOAT,
   Size: DataTypes.FLOAT,

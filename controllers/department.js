@@ -48,10 +48,7 @@ try {
 exports.departments=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(500).json({message:'id is invalid'})
-    }
+   
     const departments=await departments.findByPk(id)
     if(!departments)
     {
@@ -65,10 +62,7 @@ try {
 exports.Updatedepartments=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(500).json({message:'id is invalid'})
-    }
+   
     const departmentss=await departments.findByPk(id)
     if(!departmentss)
     {
@@ -87,10 +81,7 @@ try {
 exports.Deletedepartments=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(500).json({message:'id is invalid'})
-    }
+   
     const departmentss=await departments.findByPk(id)
     if(!departmentss)
     {

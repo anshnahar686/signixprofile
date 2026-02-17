@@ -36,9 +36,7 @@ exports.AllAttendence = async (req, res) => {
 exports.Attendences = async (req, res) => {
     try {
         const { id } = req.params
-        if (!validate(id)) {
-            return res.status(400).json({ message: 'id is invalid' })
-        }
+        
         const result = await Attendence.findByPk(id)
         if (!result) {
             return res.status(401).json({ message: 'attendence is not found' })
@@ -139,9 +137,7 @@ console.log(category)
 exports.DeleteAttendence = async (req, res) => {
     try {
         const { id } = req.params
-        if (!validate(id)) {
-            return res.status(400).json({ message: 'id is invalid' })
-        }
+       
         const result = await Attendence.findByPk(id)
         // console.log(result)
         if (!result) {

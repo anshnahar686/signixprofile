@@ -38,10 +38,7 @@ try {
 exports.roles=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(500).json({message:'id is invalid'})
-    }
+    
     const allroles=await roles.findByPk(id)
     if(!allroles)
     {
@@ -55,10 +52,7 @@ try {
 exports.Updateroles=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(500).json({message:'id is invalid'})
-    }
+   
     const allroles=await roles.findByPk(id)
     if(!allroles)
     {
@@ -78,10 +72,7 @@ try {
 exports.Deleteroles=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-        return res.status(500).json({message:'id is invalid'})
-    }
+    
     const allroles=await roles.findByPk(id)
     if(!allroles)
     {

@@ -9,12 +9,13 @@ const sequelize = require('../config/connection.js');
 const orders = sequelize.define('order', {
 
   id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: DataTypes.UUIDV4,
+    // defaultValue: DataTypes.INTEGER,
+    autoIncrement:true
   },
   customer_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
 
@@ -41,7 +42,7 @@ const orders = sequelize.define('order', {
     defaultValue: 'Pending'
   },
     bill_from_id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   ship_to_id:{

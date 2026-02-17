@@ -2,10 +2,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const Department=sequelize.define('department',{
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         unique: true,
-        defaultValue: DataTypes.UUIDV4,
+        
+        autoIncrement:true
 
     },
      cDt: {

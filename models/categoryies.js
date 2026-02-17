@@ -3,9 +3,10 @@ const sequilize = require('../config/connection.js')
 const ProductCategory = sequilize.define('category', {
 
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+      
+        autoIncrement:true
     },
   cDt: {
     type: DataTypes.DATE,

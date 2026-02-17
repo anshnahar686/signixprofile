@@ -3,9 +3,10 @@ const sequilize = require('../config/connection');
 
 const attendence_logs = sequilize.define('dailyattendence_logs', {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+       
+        autoIncrement:true
     },
     Attendance_Dt: {
         type: DataTypes.DATE,

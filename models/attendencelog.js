@@ -3,9 +3,10 @@ const sequelize = require('../config/connection');
 
 const daily_logs = sequelize.define('attendence_logs', {
         id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
+       
+        autoIncrement:true
     },
   LogTypeID: {
     type: DataTypes.INTEGER

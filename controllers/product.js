@@ -90,9 +90,7 @@ exports.AllProducts = async (req, res) => {
 exports.Products = async (req, res) => {
     try {
         const { id } = req.params
-        if (!validate(id)) {
-            return res.status(400).json({ message: 'invalid id' })
-        }
+        
         const createproducts = await product.findByPk(id)
         if (!createproducts) {
             return res.status(400).json({ message: 'products are not found' })
@@ -105,9 +103,7 @@ exports.Products = async (req, res) => {
 exports.UpdateProducts = async (req, res) => {
     try {
         const { id } = req.params
-        if (!validate(id)) {
-            return res.status(400).json({ message: 'invalid id' })
-        }
+      
         const createproducts = await product.findByPk(id)
         if (!createproducts) {
             return res.status(400).json({ message: 'products are not found' })
@@ -126,9 +122,7 @@ exports.UpdateProducts = async (req, res) => {
 exports.DeleteProducts = async (req, res) => {
     try {
         const { id } = req.params
-        if (!validate(id)) {
-            return res.status(400).json({ message: 'invalid id' })
-        }
+   
         const createproducts = await product.findByPk(id)
         if (!createproducts) {
             return res.status(400).json({ message: 'products are not found' })

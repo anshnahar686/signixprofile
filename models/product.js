@@ -7,9 +7,10 @@ const sequelize = require('../config/connection.js');
 const ProductList = sequelize.define('product_lists', {
 
   id: {
-    type: DataTypes.UUID,
+    type: DataTypes.INTEGER,
     primaryKey: true,
-    defaultValue: DataTypes.UUIDV4,
+    // defaultValue: DataTypes.INTEGER,
+    autoIncrement:true
   },
   cDt: {
     type: DataTypes.DATE,

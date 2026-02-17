@@ -30,10 +30,7 @@ exports.AllLogs=async (req,res) => {
 exports.Logs=async (req,res) => {
     try {
         const {id}=req.params
-        if(!validate(id))
-        {
-            return res.status(500).json({message:'id is invalid'})
-        }
+        
         const alllogs=await attendence_logs.findByPk(id)
         if(!alllogs)
         {
@@ -47,10 +44,7 @@ exports.Logs=async (req,res) => {
 exports.UpdateLogs=async (req,res) => {
        try {
         const {id}=req.params
-        if(!validate(id))
-        {
-            return res.status(500).json({message:'id is invalid'})
-        }
+      
         const alllogs=await attendence_logs.findByPk(id)
         if(!alllogs)
         {
@@ -69,10 +63,7 @@ exports.UpdateLogs=async (req,res) => {
 exports.DeleteLogs=async (req,res) => {
      try {
         const {id}=req.params
-        if(!validate(id))
-        {
-            return res.status(500).json({message:'id is invalid'})
-        }
+       
         const alllogs=await attendence_logs.findByPk(id)
         if(!alllogs)
         {

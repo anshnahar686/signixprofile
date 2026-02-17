@@ -155,9 +155,7 @@ exports.GetUssers = async (req, res) => {
 }
 exports.UpdateUsers = async (req, res) => {
     const { id } = req.params
-    if (!validate(id)) {
-        return res.status(400).json({ message: 'id is invalid' })
-    }
+    
     const finduser = await user.findByPk(id)
     if (!finduser) {
         return res.status(400).json({ message: 'user is not found' })
@@ -174,9 +172,7 @@ exports.UpdateUsers = async (req, res) => {
 }
 exports.DeleteUser = async (req, res) => {
     const { id } = req.params
-    if (!validate(id)) {
-        return res.status(400).json({ message: 'id is invalid' })
-    }
+    
     const finduser = await user.findByPk(id)
     if (!finduser) {
         return res.status(400).json({ message: 'user is not found' })
@@ -191,9 +187,7 @@ exports.DeleteUser = async (req, res) => {
 exports.Getuser = async (req, res) => {
     try {
         const { id } = req.params
-        if (!validate(id)) {
-            return res.status(400).json({ message: 'id is invalid' })
-        }
+       
         const finduser = await user.findByPk(id)
         if (!finduser) {
             return res.status(400).json({ message: 'user is not found' })

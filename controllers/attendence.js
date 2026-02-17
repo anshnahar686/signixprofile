@@ -7,9 +7,7 @@ exports.CreateAttendce = async (req, res) => {
         if (!employee_id || !date || !checkInTime || !checkoutTime) {
             return res.status(400).json({ message: 'fields are missing' })
         }
-        if (!validate(employee_id)) {
-            return res.status(404).json({ message: 'id is invalid' })
-        }
+        
         const f_employee = await employee.findByPk(employee_id)
         if (!f_employee) {
             return res.status(404).json({ message: 'employee is not found' })
@@ -17,6 +15,7 @@ exports.CreateAttendce = async (req, res) => {
         const attendences = await Attendence.create({ employee_id, date, checkInTime, checkoutTime, status })
         res.status(201).json({ message: 'attendence', attendences })
     } catch (error) {
+        cosnole
         res.status(500).json({ message: 'some error is occured', error: error.message })
     }
 }
@@ -35,10 +34,7 @@ exports.AllAttendence = async (req, res) => {
 exports.Attendences=async (req, res) => {
     try {
         const {id}=req.params
-        if(!validate(id))
-        {
-            return res.status(400).json({message:'id is invalid'})
-        }
+       
         const result=await Attendence.findByPk(id)
         if(!result)
         {
@@ -52,10 +48,7 @@ exports.Attendences=async (req, res) => {
 exports.UpdateAttendence=async (req,res) => {
         try {
         const {id}=req.params
-        if(!validate(id))
-        {
-            return res.status(400).json({message:'id is invalid'})
-        }
+        
         const result=await Attendence.findByPk(id)
         if(!result)
         {
@@ -74,10 +67,7 @@ exports.UpdateAttendence=async (req,res) => {
 exports.DeleteAttendence=async (req,res) => {
    try {
         const {id}=req.params
-        if(!validate(id))
-        {
-            return res.status(400).json({message:'id is invalid'})
-        }
+        
         const result=await Attendence.findByPk(id)
         if(!result)
         {

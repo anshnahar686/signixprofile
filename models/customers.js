@@ -3,10 +3,11 @@ const Orders=require('./order.js')
 const sequilze = require('../config/connection.js')
 const customers = sequilze.define('customers', {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         unique: true,
-        defaultValue: DataTypes.UUIDV4,
+        
+        autoIncrement:true
     },
     name: {
         type: DataTypes.STRING,

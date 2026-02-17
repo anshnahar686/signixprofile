@@ -2,10 +2,11 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const roles = sequelize.define('role', {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         unique: true,
-        defaultValue: DataTypes.UUIDV4,
+        // defaultValue: DataTypes.INTEGER,
+        autoIncrement:true
 
     },
     cDt: {

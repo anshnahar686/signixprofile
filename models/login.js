@@ -2,10 +2,11 @@ const { DataTypes } = require('sequelize')
 const sequilize = require('../config/connection.js')
 const User_login = sequilize.define("User_login", {
     id: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         primaryKey: true,
         unique: true,
-        defaultValue: DataTypes.UUIDV4,
+        // defaultValue: DataTypes.INTEGER,
+        autoIncrement:true
 
     },
     employee_code: {

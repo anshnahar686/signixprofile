@@ -33,10 +33,7 @@ exports.AllLogs=async (req,res) => {
 exports.Logs=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-      return res.status(400).json({message:'id is invalid'})
-    }
+   
     const finduser=await attendence_logs.findByPk(id)
     if (!finduser) {
         return res.status(401).json({message:'attendence details are not found'})   
@@ -49,10 +46,7 @@ try {
 exports.UpdateLogs=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-      return res.status(400).json({message:'id is invalid'})
-    }
+    
     const finduser=await attendence_logs.findByPk(id)
     if (!finduser) {
         return res.status(401).json({message:'attendence details are not found'})   
@@ -70,10 +64,7 @@ try {
 exports.DeleteLogs=async (req,res) => {
 try {
     const {id}=req.params
-    if(!validate(id))
-    {
-      return res.status(400).json({message:'id is invalid'})
-    }
+   
     const finduser=await attendence_logs.findByPk(id)
     if (!finduser) {
         return res.status(401).json({message:'attendence details are not found'})   
